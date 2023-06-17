@@ -42,11 +42,13 @@ class Util():
 
         raw_predictions = tf.convert_to_tensor(self.model.predict(image))
         probabilities = np.around(keras.activations.softmax(raw_predictions)*100).tolist()[0]
+        # print(keras.activations.softmax(raw_predictions))
         result.append({
             'class': self.class_number_to_name(raw_predictions.numpy().argmax()),
             'class_probability': probabilities,
             'class_dictionary': self.__class_name_to_number,
         })
+        print(result)
         return result
 
 
@@ -74,8 +76,12 @@ class Util():
         :param uri:
         :return:
         '''
-        # encoded_data = b64str.split(',')[1]
-        nparr = np.frombuffer(base64.b64decode(b64str), np.uint8)
+        if isinstance(b64str, str):
+            encoded_data = b64str.split(',')[1]
+        else:
+            encoded_data = b64str
+
+        nparr = np.frombuffer(base64.b64decode(encoded_data), np.uint8)
         img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
         return img
 

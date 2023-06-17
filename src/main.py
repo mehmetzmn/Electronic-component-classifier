@@ -1,5 +1,5 @@
 import os
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 from scrap import Scrap
 from util import Util
 
@@ -23,11 +23,20 @@ def changeName(ROOT):
 
 
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder="UI")
 
 @app.route('/classify_image', methods=['GET', 'POST'])
 def classify_image():
-    return 'hi'
+    image_data = request.form['image_data']
+
+    model = Util("/Users/user/Desktop/Python projects/image classification/models/my_model", 
+                    "/Users/user/Desktop/Python projects/image classification/models/model_classes.json")
+
+    response = jsonify(model.classify_image(image_data, None))
+
+    response.headers.add('Access-Control-Allow-Origin', '*')
+
+    return response
 
 
 
@@ -40,15 +49,17 @@ def main():
     #             "/Path/to/the/data", use_container_len=True)
 
     # scrap.fit()
-
-    util_obj = Util("/Users/User/Desktop/Python projects/image classification/models/my_model", 
-                    "/Users/User/Desktop/Python projects/image classification/models/model_classes.json")
-    test_img = util_obj.img_to_base64("/Users/User/Desktop/Python projects/image classification/test/test 4.jpeg")
+    
+    util_obj = Util("/Users/user/Desktop/Python projects/image classification/models/my_modelv2", 
+                    "/Users/user/Desktop/Python projects/image classification/models/model_classes.json")
+    test_img = util_obj.img_to_base64("/Users/user/Desktop/Python projects/image classification/test/test 9.jpeg")
 
     print(util_obj.classify_image(test_img, None))
 
+
+
 if __name__ == "__main__":
-    main()
+    # main()
     # changeName("Path")
-    # app.run(port=5000)
+    app.run(port=5000)
 

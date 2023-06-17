@@ -1,7 +1,7 @@
 {
   "capacitor": 0,
   "diode": 1,
-  "integrated circuit": 2,
+  "integrated_circuit": 2,
   "resistor": 3,
   "transistor": 4
 }

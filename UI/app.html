@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Electronics Parts Classifier</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./dropzone.min.css">
+    <link rel="stylesheet" href="./app.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-light bg-light justify-content-center">
+        <a class="navbar-brand" href="#">Electronics Parts Classifier</a>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+        <div class="col card-wrapper" data-component="capacitor">
+                <div class="card border-0">
+                    <div class="position-relative rounded overflow-hidden mx-auto custom-box-image">
+                        <img class="w-100 h-100" src="./images/capacitor.jpg" alt="Card image cap">
+                    </div>
+                    <div class="card-body text-center mt-4">
+                        <h4 class="text-uppercase card-title">Capacitor</h4>
+                        </p>
+                    </div>
+                </div>
+            </div>            
+            <div class="col card-wrapper" data-component="diode">
+                    <div class="card border-0">
+                        <div class="position-relative rounded overflow-hidden mx-auto custom-box-image">
+                            <img class="w-100 h-100" src="./images/diode.jpeg" alt="Card image cap">
+                        </div>
+                        <div class="card-body text-center mt-4">
+                            <h4 class="text-uppercase card-title">Diode</h4>
+                            </p>
+                        </div>
+                    </div>
+            </div>            
+            <div class="col card-wrapper" data-component="integrated_circuit">
+                    <div class="card border-0">
+                        <div class="position-relative rounded overflow-hidden mx-auto custom-box-image">
+                            <img class="w-100 h-100" src="./images/integrated_circuit.jpeg" alt="Card image cap">
+                        </div>
+                        <div class="card-body text-center mt-4">
+                            <h4 class="text-uppercase card-title">Integrated Circuit</h4>
+                            </p>
+                        </div>
+                    </div>
+            </div>          
+
+            <div class="col card-wrapper" data-component="resistor">
+                <div class="card border-0">
+                    <div class="position-relative rounded overflow-hidden mx-auto custom-box-image">
+                        <img class="w-100 h-100" src="./images/resistor.jpg" alt="Card image cap">
+                    </div>
+                    <div class="card-body text-center mt-4">
+                        <h4 class="text-uppercase card-title">Resistor</h4>
+                        </p>
+                    </div>
+                </div>
+            </div>      
+
+            <div class="col card-wrapper" data-component="transistor">
+                <div class="card border-0">
+                    <div class="position-relative rounded overflow-hidden mx-auto custom-box-image">
+                        <img class="w-100 h-100" src="./images/transistor.jpg" alt="Card image cap">
+                    </div>
+                    <div class="card-body text-center mt-4">
+                        <h4 class="text-uppercase card-title">Transistor</h4>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="row">
+                    <div class="col-12 mx-auto">
+                        <form action="/file-upload" class="dropzone" id="dropzone">
+                            <div class="dz-message needsclick">
+                                <img src="./images/upload.png" width="50vw" height="50vw"><br>
+                                <span class="note needsclick">Drop files here or click to upload</span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-3 mx-auto">
+                        <button id="submitBtn" type="button" class="btn btn-success">Classify</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-sm-8 error" id="error" >
+                <p>Can't classify image. Classifier was not able to detect face and two eyes properly</p>    
+            </div>
+
+            <div class="col-sm-4" id="resultHolder">
+            </div>
+            <div class="col-sm-4" id="divClassTable">
+                <table id="classTable">
+                        <tr>
+                            <th>Component</th>
+                            <th>Probability Score</th>
+                        </tr>
+                        <tr>
+                            <td>Capacitor</td>
+                            <td id="score_capacitor"></td>
+                        </tr>
+                        <tr>
+                            <td>Diode</td>
+                            <td id="score_diode"></td>
+                        </tr>
+                        <tr>
+                            <td>Integrated Circuit</td>
+                            <td id="score_integrated_circuit"></td>
+                        </tr>
+                        <tr>
+                            <td>Resistor</td>
+                            <td id="score_resistor"></td>
+                        </tr>
+                        <tr>
+                            <td>Transistor</td>
+                            <td id="score_transistor"></td>
+                        </tr>
+                </table>
+            </div>
+            
+        </div>
+
+    </div>
+
+</body>
+<!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script src="./dropzone.min.js"></script>
+<script src="./app.js"></script>
+</html>
