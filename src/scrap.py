@@ -19,7 +19,12 @@ from tqdm import tqdm
 
 
 class Scrap:
+    """
+    Scrap class is used for scraping images from google images. It uses selenium, chromedriver and beautifulsoup4.
     
+    
+    
+    """
     def __init__(self, query, binary_location, driver_path, download_path, SCROLL_PAUSE_TIME=2, SCROLL_COUNT=5, use_container_len=False, start_from=False):
         self.query = query
         self.download_path = download_path
