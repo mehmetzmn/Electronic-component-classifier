@@ -7,7 +7,20 @@ import numpy as np
 import tensorflow as tf
 from tensorflow import keras
 
+# NOTE: credits to codebasics, I used this channel's code as a reference for this class
+
+
 class Util():
+    """
+    Util class for image classification.
+
+    Parameters
+    ----------
+    model_path : str
+        Path to the model.
+    classes : str
+        Path to the classes json file.
+    """
 
     def __init__(self, model_path, classes):
         self.classes = classes
@@ -18,6 +31,20 @@ class Util():
 
 
     def img_to_base64(self, image_file):
+        """
+        Convert image to base64. Flask server accepts base64 images.
+
+        Parameters
+        ----------
+        image_file : str
+            Path to the image.
+        
+        Returns
+        -------
+        encoded_string : str
+            Base64 encoded image.
+
+        """
 
         with open(image_file, "rb") as image:
             encoded_string = base64.b64encode(image.read())
@@ -27,6 +54,21 @@ class Util():
 
 
     def classify_image(self, image_base64_data, file_path=None):
+        """
+        Classify the image. This method uses the model and the classes json file.
+
+        Parameters
+        ----------
+        image_base64_data : str
+            Base64 encoded image.
+        file_path : str, optional
+            Path to the image. The default is None.
+        
+        Returns
+        -------
+        result : list
+
+        """
 
         self.load_model_()
 
@@ -53,10 +95,26 @@ class Util():
 
 
     def class_number_to_name(self, class_num):
+        """
+        Convert class number to class name.
+
+        Parameters
+        ----------
+        class_num : int
+            Class number.
+        
+        Returns
+        -------
+        self.__class_number_to_name[class_num] : str
+            Class name.
+        """
         return self.__class_number_to_name[class_num]
     
     
     def load_model_(self):
+        """
+        Load the model and the classes json file.
+        """
         print("loading model...start")
 
         time.sleep(3)

@@ -10,7 +10,8 @@ from selenium.webdriver.support.wait import WebDriverWait
 from tqdm import tqdm
 
 
-# NOTE: This modulu doesn't work properly. It's not downloading all the images.
+# NOTE: credits=https://github.com/ivangrov/Downloading_Google_Images, I have made some changes on the original code.
+#       This module doesn't work properly. It's not downloading all the images.
 #       Known issues: 1-Even though module grabs image source url successfully,
 #                     requests.get() method doesn't response and it stucks there.
 #                     for resolving this issue, timeout parameter is added to requests.get() method.
@@ -20,10 +21,27 @@ from tqdm import tqdm
 
 class Scrap:
     """
-    Scrap class is used for scraping images from google images. It uses selenium, chromedriver and beautifulsoup4.
-    
-    
-    
+    Scrap images from Google Images. This module uses Selenium and BeautifulSoup.
+
+    Parameters
+    ----------
+    query : str
+        Query to search on Google Images.
+    binary_location : str
+        Path to the Google Chrome binary file.(browser location)
+    driver_path : str
+        Path to the ChromeDriver.
+    download_path : str
+        Path to the download directory.
+    SCROLL_PAUSE_TIME : int, optional
+        Pause time between scrolls. The default is 2.
+    SCROLL_COUNT : int, optional
+        Number of scrolls. The default is 5.
+    use_container_len : bool, optional
+        If True, it will use the length of the containers. The default is False.
+    start_from : bool, optional
+        If True, it will ask for the starting point. The default is False. If downloads fails, you can start from the last downloaded image.
+
     """
     def __init__(self, query, binary_location, driver_path, download_path, SCROLL_PAUSE_TIME=2, SCROLL_COUNT=5, use_container_len=False, start_from=False):
         self.query = query
@@ -43,6 +61,9 @@ class Scrap:
 
 
     def _makedir(self):
+        """
+        Create a directory for the images.
+        """
         PATH = os.path.join(self.download_path, self.query)
         # print("PATH", PATH)
 
@@ -56,6 +77,9 @@ class Scrap:
 
 
     def _download_image(self, PATH, url, num):
+        """
+        download the image from the given url.
+        """
 
         response = requests.get(url, timeout=15)
         print(response)
@@ -65,6 +89,10 @@ class Scrap:
 
 
     def _scroll(self):
+        """
+        Waits for an input to proceed. Then scrolls down the page and grabs the image source urls. 
+        Downloads all images from first page.
+        """
 
         self.drvr.maximize_window()
         self.drvr.get(self.URL)
@@ -90,6 +118,7 @@ class Scrap:
         else:
             self.file_length = 50
 
+        # Starting point for downloading images. If download fails, you can start from the last downloaded image.
         if self.start_from:
             starting_point = int(input("Please enter the starting point: "))
         else:
